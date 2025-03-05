@@ -4,6 +4,9 @@ export type TimerControl = {
     timeBreaks:number,
     timeRound:number,
     isBreak:boolean,
+    totalRealTime:number,
+    realTime:number,
+    relojTime:TimerProps
 }
 
 

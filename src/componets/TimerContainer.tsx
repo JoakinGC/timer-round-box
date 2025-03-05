@@ -9,15 +9,17 @@ const TimerContainer = () =>{
         timeBreaks:2,
         timeRound:2,
         isBreak:false,
-    })
+        totalRealTime:0,
+        realTime:0,
+        relojTime:{
+            hours:0,
+            minutes:0,
+            seconds:0
+        }})
     const totalRealTime = useRef<number>(0);
     const realTime = useRef<number>(0);
 
-    const relojTime= useRef<TimerProps>({
-        hours:0,
-        minutes:0,
-        seconds:0
-    })
+    
     
     const intervalTimer = useRef<undefined|number>();
 
@@ -27,31 +29,31 @@ const TimerContainer = () =>{
         let TotalRestTimeInSeconds = timerAux.numberRounds * timerAux.timeBreaks; 
         let TotalTimeInSeconds = TotalRoundTimeInSeconds + TotalRestTimeInSeconds;
 
-        if(realTime.current===timer.current.timeRound&&!(timer.current.isBreak)){
-            realTime.current=0;
+        if(timer.current.realTime===timer.current.timeRound&&!(timer.current.isBreak)){
+            timer.current.realTime=0;
             timer.current.isBreak = !timer.current.isBreak;
             timer.current.numberComplets +=1;
-            relojTime.current ={
+            timer.current.relojTime ={
                 hours:0,
                 minutes:0,
                 seconds:0
             }
         }
 
-        if(realTime.current===timer.current.timeBreaks&&timer.current.isBreak){
-            realTime.current=0;
+        if(timer.current.realTime===timer.current.timeBreaks&&timer.current.isBreak){
+            timer.current.realTime=0;
             timer.current.isBreak = !timer.current.isBreak;
-            relojTime.current ={
+            timer.current.relojTime ={
                 hours:0,
                 minutes:0,
                 seconds:0
             };
         }
 
-        if(totalRealTime.current===TotalTimeInSeconds){
-            console.log("Se detuvo");
+        if(timer.current.totalRealTime===TotalTimeInSeconds){
+            console.log("stopped");
 
-            relojTime.current ={
+            timer.current.relojTime ={
                 hours:0,
                 minutes:0,
                 seconds:0
@@ -64,18 +66,18 @@ const TimerContainer = () =>{
         let timerAux = timer.current;
         if(timerAux.numberRounds>0){
             intervalTimer.current = setInterval(()=>{
-                relojTime.current.seconds+=1;
-                totalRealTime.current +=1;
-                realTime.current +=1;
+                timer.current.relojTime.seconds+=1;
+                timer.current.totalRealTime +=1;
+                timer.current.realTime +=1;
                 console.log("reloj timer");
     
-                if(relojTime.current.seconds===60){
-                    relojTime.current.seconds=0;
-                    relojTime.current.minutes+=1;
+                if(timer.current.relojTime.seconds===60){
+                    timer.current.relojTime.seconds=0;
+                    timer.current.relojTime.minutes+=1;
                 }
-                if(relojTime.current.minutes===60){
-                    relojTime.current.minutes=0;
-                    relojTime.current.hours+=1;
+                if(timer.current.relojTime.minutes===60){
+                    timer.current.relojTime.minutes=0;
+                    timer.current.relojTime.hours+=1;
                 }
             
                 controlTimer()
@@ -88,9 +90,9 @@ const TimerContainer = () =>{
     return(
         <main>
             <Timer
-                hours={relojTime.current.hours}
-                minutes={relojTime.current.minutes}
-                seconds={relojTime.current.seconds}
+                hours={timer.current.relojTime.hours}
+                minutes={timer.current.relojTime.minutes}
+                seconds={timer.current.relojTime.seconds}
             />
             <hr/>
             <section>
