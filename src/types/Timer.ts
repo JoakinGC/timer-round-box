@@ -3,6 +3,7 @@ export type TimerControl = {
     numberRounds:number,
     timeBreaks:number,
     timeRound:number,
+    isBreak:boolean,
 }
 
 
