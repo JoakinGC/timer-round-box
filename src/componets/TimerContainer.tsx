@@ -1,5 +1,5 @@
 import { useEffect,  useRef } from "react";
-import { TimerControl, TimerProps } from "../types/Timer";
+import { TimerControl } from "../types/Timer";
 import Timer from "./Timer";
 
 const TimerContainer = () =>{
@@ -15,13 +15,10 @@ const TimerContainer = () =>{
             hours:0,
             minutes:0,
             seconds:0
-        }})
-    const totalRealTime = useRef<number>(0);
-    const realTime = useRef<number>(0);
+        },
+        intervalTimer:undefined
+    })
 
-    
-    
-    const intervalTimer = useRef<undefined|number>();
 
     function controlTimer() {
         let timerAux = timer.current;
@@ -58,14 +55,14 @@ const TimerContainer = () =>{
                 minutes:0,
                 seconds:0
             };
-            clearInterval(intervalTimer.current);    
+            clearInterval(timer.current.intervalTimer);    
         }
     }
 
     useEffect(() =>{
         let timerAux = timer.current;
         if(timerAux.numberRounds>0){
-            intervalTimer.current = setInterval(()=>{
+            timer.current.intervalTimer = setInterval(()=>{
                 timer.current.relojTime.seconds+=1;
                 timer.current.totalRealTime +=1;
                 timer.current.realTime +=1;
@@ -83,7 +80,7 @@ const TimerContainer = () =>{
                 controlTimer()
             },1000)
 
-            return () => clearInterval(intervalTimer.current);
+            return () => clearInterval(timer.current.intervalTimer);
         }
     },[])
 
