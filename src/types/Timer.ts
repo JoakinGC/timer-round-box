@@ -6,7 +6,8 @@ export type TimerControl = {
     isBreak:boolean,
     totalRealTime:number,
     realTime:number,
-    relojTime:TimerProps
+    relojTime:TimerProps,
+    intervalTimer:number|undefined,
 }
 
 
@@ -14,4 +15,10 @@ export type TimerProps = {
     hours:number,
     minutes:number,
     seconds:number,
+}
+
+export type FormTimerProps = {
+    numberRounds:number,
+    timeBreaks:number,
+    timeRound:number,
 }
