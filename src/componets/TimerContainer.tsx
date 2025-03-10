@@ -1,8 +1,9 @@
-import { useEffect,  useRef } from "react";
+import { useEffect,  useRef,useState } from "react";
 import { TimerControl } from "../types/Timer";
 import Timer from "./Timer";
 
 const TimerContainer = () =>{
+    const [dummyState, setDummyState] = useState(false); 
     const timer = useRef<TimerControl>({
         numberComplets:0,
         numberRounds:1,
@@ -78,6 +79,7 @@ const TimerContainer = () =>{
                 }
             
                 controlTimer()
+                setDummyState((prev) => !prev);
             },1000)
 
             return () => clearInterval(timer.current.intervalTimer);
