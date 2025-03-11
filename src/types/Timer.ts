@@ -8,6 +8,7 @@ export type TimerControl = {
     realTime:number,
     relojTime:TimerProps,
     intervalTimer:number|undefined,
+    
 }
 
 

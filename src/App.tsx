@@ -17,6 +17,7 @@ function App() {
       <h1>Reloj</h1>
       
       <TimerContainer
+        timerProps={timerProps}
       />
       <FormTimer
         SetTimerProps={SetTimerProps}

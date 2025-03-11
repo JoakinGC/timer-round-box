@@ -1,6 +1,7 @@
 
 
-const RelojForm = ({setPropsTimer,propsTimer}:{setPropsTimer:any,propsTimer:any}) =>{
+const InputTimer = ({setPropsTimer,propsTimer}:{setPropsTimer:any,propsTimer:any}) =>{
+
     
     return(
         <>
@@ -27,4 +28,4 @@ const RelojForm = ({setPropsTimer,propsTimer}:{setPropsTimer:any,propsTimer:any}
     )
 }
 
-export default RelojForm
+export default InputTimer;
