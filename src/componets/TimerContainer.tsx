@@ -4,29 +4,29 @@ import { useTimerInterval } from "../hooks/useTimerInterval";
 
 const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     
-    const {uiComponents,clearTimer,startTimer,stopTimmer} =useTimerInterval({timerProps});
+    const {timerState,resetTimer,startTimer,stopTimer} =useTimerInterval({timerProps});
 
     return(
         <main>
-            <p>{uiComponents.isBreak ?"Descanso" :"Round"}</p>
+            <p>{timerState.isBreak ?"Descanso" :"Round"}</p>
             <Timer
-                hours={uiComponents.relojTime.hours}
-                minutes={uiComponents.relojTime.minutes}
-                seconds={uiComponents.relojTime.seconds}
+                hours={timerState.relojTime.hours}
+                minutes={timerState.relojTime.minutes}
+                seconds={timerState.relojTime.seconds}
             />
             <hr/>
             <section>
                 <section>
                     <h2>Rounds</h2>
-                    {uiComponents.numberRounds}
+                    {timerState.numberRounds}
                 </section>
                 <section>
                     Rounds completos:
-                    {uiComponents.numberComplets}
+                    {timerState.numberComplets}
                 </section>
-                <button disabled={uiComponents.buttonActive.buttonStop} onClick={() => stopTimmer()}>Parar</button>
-                <button disabled={uiComponents.buttonActive.buttonInit} onClick={() => startTimer()}>Iniciar</button>
-                <button disabled={uiComponents.buttonActive.buttonRestart} onClick={() => clearTimer()}>Reinciar</button>
+                <button disabled={timerState.buttonActive.buttonStop} onClick={() => stopTimer()}>Parar</button>
+                <button disabled={timerState.buttonActive.buttonInit} onClick={() => startTimer()}>Iniciar</button>
+                <button disabled={timerState.buttonActive.buttonRestart} onClick={() => resetTimer()}>Reinciar</button>
             </section>
         </main>
     )
