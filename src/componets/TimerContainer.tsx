@@ -5,9 +5,9 @@ import Timer from "./Timer";
 const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     const [dummyState, setDummyState] = useState(false); 
     const [buttonActive, disableButton] = useState({
-        buttonInit:true,
-        buttonStop:false,
-        buttonRestart:false
+        buttonInit:false,
+        buttonStop:true,
+        buttonRestart:true
     }); 
     const timer = useRef<TimerControl>({
         numberComplets:0,
@@ -25,13 +25,31 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
         intervalTimer:undefined,
     })
 
+    function clearTimer(){
+        clearInterval(timer.current.intervalTimer); 
+        timer.current.isBreak = false;
+        timer.current.numberComplets = 0;
+        timer.current.realTime = 0;
+        timer.current.totalRealTime = 0;
+        timer.current.relojTime = {
+            hours:0,
+            minutes:0,
+            seconds:0
+        };
+        disableButton({
+            buttonInit:false,
+            buttonRestart:true,
+            buttonStop:true
+        })
+    }
+
     function controlTimer() {
         let timerAux = timer.current;
         let TotalRoundTimeInSeconds = timerAux.numberRounds * timerAux.timeRound;
         let TotalRestTimeInSeconds = timerAux.numberRounds * timerAux.timeBreaks; 
-        let TotalTimeInSeconds = TotalRoundTimeInSeconds + TotalRestTimeInSeconds;
+        let TotalTimeInSeconds = TotalRoundTimeInSeconds + TotalRestTimeInSeconds+1;
 
-        if(timer.current.realTime===timer.current.timeRound&&!(timer.current.isBreak)){
+        if(timer.current.realTime>timer.current.timeRound&&!(timer.current.isBreak)){
             timer.current.realTime=0;
             timer.current.isBreak = !timer.current.isBreak;
             timer.current.numberComplets +=1;
@@ -42,10 +60,10 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
             }
         }
 
-        if(timer.current.realTime===timer.current.timeBreaks&&timer.current.isBreak){
+        if(timer.current.realTime>timer.current.timeBreaks&&timer.current.isBreak){
             timer.current.realTime=0;
             timer.current.isBreak = !timer.current.isBreak;
-            timer.current.relojTime ={
+            timer.current.relojTime = {
                 hours:0,
                 minutes:0,
                 seconds:0
@@ -60,23 +78,31 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
                 minutes:0,
                 seconds:0
             };
+            disableButton({
+                buttonInit:true,
+                buttonRestart:true,
+                buttonStop:true
+    
+            })
             clearInterval(timer.current.intervalTimer);    
         }
     }
 
     const initTimer = () =>{
-        disableButton({
-            buttonInit:true,
-            buttonRestart:false,
-            buttonStop:false
-
-        })
+        
         let timerAux = timer.current;
-        if(timerAux.numberRounds>0){
+        if(timerAux.numberRounds>0&&timerAux.timeBreaks>0&&timerAux.timeRound>0){
+            disableButton({
+                buttonInit:true,
+                buttonRestart:false,
+                buttonStop:false
+    
+            })
             timer.current.intervalTimer = setInterval(()=>{
                 timer.current.relojTime.seconds+=1;
                 timer.current.totalRealTime +=1;
                 timer.current.realTime +=1;
+                setDummyState((prev) => !prev);
                 console.log("reloj timer");
     
                 if(timer.current.relojTime.seconds===60){
@@ -87,10 +113,12 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
                     timer.current.relojTime.minutes=0;
                     timer.current.relojTime.hours+=1;
                 }
-            
                 controlTimer()
-                setDummyState((prev) => !prev);
+                console.log(timer);
+                
             },1000)
+
+
 
             return () => clearInterval(timer.current.intervalTimer);
         }
@@ -99,46 +127,35 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     const stop = () =>{
         clearInterval(timer.current.intervalTimer); 
         disableButton({
-            buttonInit:true,
-            buttonRestart:true,
-            buttonStop:false
+            buttonInit:false,
+            buttonRestart:false,
+            buttonStop:true
 
         }) 
     }
     const restart = () =>{
-        clearInterval(timer.current.intervalTimer); 
-        timer.current.isBreak = false;
-        timer.current.numberComplets = 0;
-        timer.current.realTime = 0;
-        timer.current.totalRealTime = 0;
-        timer.current.relojTime = {
-            hours:0,
-            minutes:0,
-            seconds:0
-        };
-        disableButton({
-            buttonInit:true,
-            buttonRestart:false,
-            buttonStop:false
-        })
+        clearTimer();
     }
 
 
     useEffect(() =>{
-        
         timer.current.timeBreaks = timerProps.timeBreaks;
         timer.current.timeRound =timerProps.timeRound;
         timer.current.numberRounds = timerProps.numberRounds;
-        let timerAux = timer.current;
-        console.log(timerAux.numberRounds>0&&timerAux.timeBreaks>0&&timerAux.timeRound>0);
+        //let timerAux = timer.current;
+        //console.log(timerAux.numberRounds>0&&timerAux.timeBreaks>0&&timerAux.timeRound>0);
         
-        if(timerAux.numberRounds>0&&timerAux.timeBreaks>0&&timerAux.timeRound>0&&!dummyState){
-            initTimer();
-        }
+        clearTimer();
+        disableButton({
+            buttonInit:false,
+            buttonRestart:true,
+            buttonStop:true
+        })
     },[timerProps])
 
     return(
         <main>
+            <p>{timer.current.isBreak ?"Descanso" :"Round"}</p>
             <Timer
                 hours={timer.current.relojTime.hours}
                 minutes={timer.current.relojTime.minutes}
