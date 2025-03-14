@@ -56,12 +56,13 @@ export function useTimerInterval({ timerProps }: { timerProps: FormTimerProps })
     setTimerState((prev) => {
       const totalRoundTimeInSeconds = prev.numberRounds * prev.timeRound;
       const totalRestTimeInSeconds = prev.numberRounds * prev.timeBreaks;
-      const totalTimeInSeconds = totalRoundTimeInSeconds + totalRestTimeInSeconds;
+      const totalTimeInSeconds = totalRoundTimeInSeconds + totalRestTimeInSeconds ;
 
       let nextState = { ...prev };
 
 
-      if (prev.realTime > prev.timeRound && !prev.isBreak) {
+      if (prev.realTime >= prev.timeRound && !prev.isBreak) {
+        console.log("Round terminado")
         nextState.realTime = 0;
         nextState.isBreak = true;
         nextState.numberComplets = prev.numberComplets + 1;
@@ -69,7 +70,8 @@ export function useTimerInterval({ timerProps }: { timerProps: FormTimerProps })
       }
 
 
-      if (prev.realTime > prev.timeBreaks && prev.isBreak) {
+      if (prev.realTime >= prev.timeBreaks && prev.isBreak) {
+        console.log("descanso terminado")
         nextState.realTime = 0;
         nextState.isBreak = false;
         nextState.relojTime = { hours: 0, minutes: 0, seconds: 0 };
@@ -138,8 +140,8 @@ export function useTimerInterval({ timerProps }: { timerProps: FormTimerProps })
           relojTime: { hours, minutes, seconds }
         };
       });
-
-      checkTimer();
+      checkTimer()
+      //setTimeout(() => checkTimer(), 50);
     }, 1000);
   };
 
