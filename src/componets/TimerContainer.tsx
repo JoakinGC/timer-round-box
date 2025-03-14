@@ -1,7 +1,7 @@
 import { FormTimerProps } from "../types/Timer";
 import Timer from "./Timer";
-import { useTimerInterval } from "../hooks/useTimerInterval";
-import { useTimerCountdown } from "../hooks/useTimerCoundDown";
+//import { useTimerInterval } from "../hooks/useTimerInterval";
+import { useTimerCountdown } from "../hooks/useTimerCountDown";
 
 const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     
