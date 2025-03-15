@@ -3,6 +3,7 @@ import './styles/App.css';
 import FormTimer from './componets/FormTimer';
 import TimerContainer from './componets/TimerContainer';
 import { FormTimerProps } from './types/Timer';
+import logo from "./assets/logo.svg";
 
 function App() {
   const [timerProps,SetTimerProps] = useState<FormTimerProps>({
@@ -16,6 +17,10 @@ function App() {
     <main>
       <article className='hero'>
         <h1 className='title--app'>Reloj</h1>
+        <img
+          src={logo}
+          className='logo reysom'      
+        />
       </article>
       <TimerContainer
         timerProps={timerProps}
