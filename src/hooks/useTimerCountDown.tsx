@@ -1,23 +1,22 @@
 import { useEffect, useState, useRef } from "react";
-import { FormTimerProps } from "../types/Timer";
+import { FormTimerProps, TimerCoundDownControl } from "../types/Timer";
 
 export function useTimerCountdown({ timerProps }: { timerProps: FormTimerProps }) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const [timerState, setTimerState] = useState({
+  const [timerState, setTimerState] = useState<TimerCoundDownControl>({
     timeRound: timerProps.timeRound,   
     timeBreaks: timerProps.timeBreaks, 
     numberRounds: timerProps.numberRounds,
     isBreak: false,
     roundsRemaining: timerProps.numberRounds,
     currentTime: timerProps.timeRound,
-
-    // Estado para la UI de los botones
     buttonActive: {
       buttonInit: false,
       buttonStop: true,
       buttonRestart: true
-    }
+    },
+    isFinally:false,
   });
 
   function toHms(totalSecs: number) {
@@ -48,17 +47,17 @@ export function useTimerCountdown({ timerProps }: { timerProps: FormTimerProps }
   function switchPhase() {
     setTimerState((prev) => {
       if (!prev.isBreak) {
-        console.log("⏳ Round terminado; iniciando descanso...");
+        console.log("Round terminado; iniciando descanso...");
         return {
           ...prev,
           isBreak: true,
           currentTime: prev.timeBreaks 
         };
       } else {
-        console.log("🔥 Descanso terminado; siguiente round...");
+        console.log("Descanso terminado; siguiente round...");
         const nextRounds = prev.roundsRemaining - 1;
         if (nextRounds <= 0) {
-          console.log("✅ Timer completado");
+          console.log("Timer completado");
           if (intervalRef.current) {
             clearInterval(intervalRef.current);
             intervalRef.current = null;

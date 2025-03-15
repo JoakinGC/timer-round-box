@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FormTimerProps, TimerProps } from "../types/Timer";
 import InputTimer from "./InputTimer";
 import { validateTime } from "../utils/validateTime";
+import "../styles/FormTimer.css";
 
 const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTimer: FormTimerProps }) => {
   const [timerRound, setTimerRound] = useState<TimerProps>({
@@ -22,7 +23,7 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setErrorMsg(""); // Limpio el error antes de validar
+    setErrorMsg(""); 
 
     if (typeof nRounds !== "number" || isNaN(nRounds)) {
       setErrorMsg("Nº de rounds debe ser un número");
@@ -34,13 +35,10 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
     }
 
     
-    if (!validateTime(timerBreak, 1, "descanso",setErrorMsg)) {
-      return;
-    }
+    if (!validateTime(timerBreak, 1, "descanso",setErrorMsg)) return;
+
     
-    if (!validateTime(timerRound, 1, "round",setErrorMsg)) {
-      return;
-    }
+    if (!validateTime(timerRound, 1, "round",setErrorMsg)) return;
     
     const totalRoundTimeInSeconds =
       timerRound.hours * 3600 + timerRound.minutes * 60 + timerRound.seconds;
@@ -56,40 +54,43 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+
+    <form className="form" onSubmit={handleSubmit}>
       {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
+      <article className="form--article">
+        <label htmlFor="numRounds">Nº de Rounds</label>
+        <input
+          id="numRounds"
+          type="number"
+          placeholder="Número de rounds"
+          onChange={(e) => {
+            const val = parseInt(e.target.value, 10);
+            if (isNaN(val)) setNRounds(0);
+            else setNRounds(val);
+          }}
+          min="1"
+        />
+      </article>
 
-      <label htmlFor="numRounds">Nº de Rounds</label>
-      <br />
-      <input
-        id="numRounds"
-        type="number"
-        placeholder="Número de rounds"
-        onChange={(e) => {
-          const val = parseInt(e.target.value, 10);
-          if (isNaN(val)) setNRounds(0);
-          else setNRounds(val);
-        }}
-      />
-      <br />
+ 
+      <article className="form--article">
+        <label>Tiempo de Round:</label>
+        <InputTimer
+          propsTimer={timerRound}
+          setPropsTimer={setTimerRound}
+        />
+      </article>
+        
+      <article className="form--article">
+        <label>Tiempo de descanso</label>
+        <InputTimer
+          propsTimer={timerBreak}
+          setPropsTimer={setTimerBreak}
+        />
+      </article>
 
-      <label>Tiempo de Round:</label>
-      <br />
-      <InputTimer
-        propsTimer={timerRound}
-        setPropsTimer={setTimerRound}
-      />
-      <br />
+      <button className="form--boutton" type="submit">Tiempo</button>
 
-      <label>Tiempo de descanso</label>
-      <br />
-      <InputTimer
-        propsTimer={timerBreak}
-        setPropsTimer={setTimerBreak}
-      />
-      <br />
-
-      <button type="submit">Configurar</button>
     </form>
   );
 };

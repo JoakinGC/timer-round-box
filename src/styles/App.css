@@ -5,6 +5,21 @@
   text-align: center;
 }
 
+section{
+  display: flex;
+  max-width: full;
+  height: 1280px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -19,12 +34,8 @@
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -39,4 +50,19 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+.hero{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title--app{
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
 }

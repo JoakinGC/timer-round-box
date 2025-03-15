@@ -1,27 +1,24 @@
 import { useEffect, useState, useRef } from "react";
-import { FormTimerProps } from "../types/Timer";
+import { FormTimerProps, TimerControl } from "../types/Timer";
 
 export function useTimerInterval({ timerProps }: { timerProps: FormTimerProps }) {
   
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   
-  const [timerState, setTimerState] = useState({
+  const [timerState, setTimerState] = useState<TimerControl>({
     timeBreaks: timerProps.timeBreaks,
     timeRound: timerProps.timeRound,
     totalRealTime: 0,
     realTime: 0,
-
     numberRounds: timerProps.numberRounds,
     numberComplets: 0,
     isBreak: false,
-
     relojTime: {
       hours: 0,
       minutes: 0,
       seconds: 0
     },
-
     buttonActive: {
       buttonInit: false,
       buttonStop: true,

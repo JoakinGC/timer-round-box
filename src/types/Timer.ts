@@ -1,18 +1,26 @@
+export type TimerCoundDownControl = {
+    timeRound:number,
+    timeBreaks:number,
+    numberRounds:number,
+    isBreak:boolean,
+    roundsRemaining:number,
+    currentTime:number,
+    buttonActive:ButtonsUIActive,
+    isFinally:boolean
+}
+
 export type TimerControl = {
     timeBreaks:number,
     timeRound:number,
     totalRealTime:number,
     realTime:number,
-    intervalTimer:number|undefined,
-    
-}
-export type TimerUIComponent = {
-    buttonActive:ButtonsUIActive,
-    relojTime:TimerProps,
     numberRounds:number,
     numberComplets:number,
     isBreak:boolean,
+    relojTime:TimerProps,
+    buttonActive:ButtonsUIActive
 }
+
 
 export type ButtonsUIActive = {
     buttonInit:boolean,

@@ -4,13 +4,23 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: black;
+  background: rgb(153,247,249);
+  background: linear-gradient(0deg, rgba(153,247,249,1) 0%, rgba(236,232,223,1) 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+section{
+  display: flex;
+  max-width: full;
+  height: 1280px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 a {

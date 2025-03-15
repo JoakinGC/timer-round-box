@@ -12,7 +12,7 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     const { hours, minutes, seconds } = toHms(timerState.currentTime);
 
     return(
-        <main>
+        <section>
             <p>{timerState.isBreak ?"Descanso" :"Round"}</p>
             <Timer
                 hours={hours}
@@ -33,7 +33,7 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
                 <button disabled={timerState.buttonActive.buttonInit} onClick={() => startTimer()}>Iniciar</button>
                 <button disabled={timerState.buttonActive.buttonRestart} onClick={() => resetTimer()}>Reinciar</button>
             </section>
-        </main>
+        </section>
     )
 }
 
