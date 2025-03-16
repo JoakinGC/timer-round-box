@@ -2,7 +2,7 @@ import { TimerProps } from "../types/Timer";
 
 const Timer = ({hours,minutes,seconds}:TimerProps) =>{
     return(
-        <>{`${hours} : ${minutes} : ${seconds}`}</>
+        <span className="reloj--timmer">{`${hours} : ${minutes} : ${seconds}`}</span>
     )
 }
 

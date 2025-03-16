@@ -26,13 +26,11 @@ function App() {
       <TimerContainer
         timerProps={timerProps}
       />
-      </article>
-      <section>
       <FormTimer
         SetTimerProps={SetTimerProps}
         propsTimer={timerProps}
       />
-      </section>
+      </article>
     </main>
   );
 }

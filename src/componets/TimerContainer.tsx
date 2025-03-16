@@ -14,7 +14,10 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
 
     return(
         <article className="timer-container">
-            <p>{(timerState.isFinally) ? "Fin": timerState.isBreak ?"Descanso" :"Round"}</p>
+            <h2>Estás en:</h2>
+            <h3>
+                {(timerState.isFinally) ? "Fin": timerState.isBreak ?"Descanso" :"Round"}
+            </h3>
             <Timer
                 hours={hours}
                 minutes={minutes}
@@ -23,12 +26,12 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
             <hr/>
             <article>
                 <article>
-                    <h2>Rounds</h2>
-                    {timerState.numberRounds}
+                    <h2>Número de Rounds</h2>
+                    <p>{timerState.numberRounds}</p>
                 </article>
                 <article>
-                    Rounds completos:
-                    {timerState.roundsRemaining}
+                    <h2>Rounds completos:</h2>
+                    <p>{timerState.roundsRemaining}</p>
                 </article>
                 <button disabled={timerState.buttonActive.buttonStop} onClick={() => stopTimer()}>Parar</button>
                 <button disabled={timerState.buttonActive.buttonInit} onClick={() => startTimer()}>Iniciar</button>

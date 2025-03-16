@@ -88,8 +88,9 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
           setPropsTimer={setTimerBreak}
         />
       </article>
-
-      <button className="form--boutton" type="submit">Tiempo</button>
+        <article className="form--article form--boutton">
+          <button  type="submit">Tiempo</button>
+        </article>
 
     </form>
   );
