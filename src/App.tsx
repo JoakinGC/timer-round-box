@@ -15,16 +15,18 @@ function App() {
   
   return (
     <main>
-      <article className='hero'>
-        <h1 className='title--app'>Reloj</h1>
-        <img
-          src={logo}
-          className='logo reysom'      
-        />
-      </article>
+      <article>
+        <article className='hero'>
+          <h1 className='title--app'>Reloj</h1>
+          <img
+            src={logo}
+            className='logo reysom'      
+          />
+        </article>
       <TimerContainer
         timerProps={timerProps}
       />
+      </article>
       <section>
       <FormTimer
         SetTimerProps={SetTimerProps}

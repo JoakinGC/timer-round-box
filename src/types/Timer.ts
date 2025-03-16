@@ -6,7 +6,7 @@ export type TimerCoundDownControl = {
     roundsRemaining:number,
     currentTime:number,
     buttonActive:ButtonsUIActive,
-    isFinally:boolean
+    isFinally:boolean,
 }
 
 export type TimerControl = {

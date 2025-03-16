@@ -2,6 +2,7 @@ import { FormTimerProps } from "../types/Timer";
 import Timer from "./Timer";
 //import { useTimerInterval } from "../hooks/useTimerInterval";
 import { useTimerCountdown } from "../hooks/useTimerCountDown";
+import "../styles/TimerContainer.css";
 
 const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     
@@ -12,28 +13,28 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     const { hours, minutes, seconds } = toHms(timerState.currentTime);
 
     return(
-        <section>
-            <p>{timerState.isBreak ?"Descanso" :"Round"}</p>
+        <article className="timer-container">
+            <p>{(timerState.isFinally) ? "Fin": timerState.isBreak ?"Descanso" :"Round"}</p>
             <Timer
                 hours={hours}
                 minutes={minutes}
                 seconds={seconds}
             />
             <hr/>
-            <section>
-                <section>
+            <article>
+                <article>
                     <h2>Rounds</h2>
                     {timerState.numberRounds}
-                </section>
-                <section>
+                </article>
+                <article>
                     Rounds completos:
                     {timerState.roundsRemaining}
-                </section>
+                </article>
                 <button disabled={timerState.buttonActive.buttonStop} onClick={() => stopTimer()}>Parar</button>
                 <button disabled={timerState.buttonActive.buttonInit} onClick={() => startTimer()}>Iniciar</button>
                 <button disabled={timerState.buttonActive.buttonRestart} onClick={() => resetTimer()}>Reinciar</button>
-            </section>
-        </section>
+            </article>
+        </article>
     )
 }
 

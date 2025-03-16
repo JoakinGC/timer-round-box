@@ -64,6 +64,7 @@ export function useTimerCountdown({ timerProps }: { timerProps: FormTimerProps }
           }
           return {
             ...prev,
+            isFinally:true,
             roundsRemaining: 0,
             buttonActive: {
               buttonInit: true,
@@ -145,6 +146,7 @@ export function useTimerCountdown({ timerProps }: { timerProps: FormTimerProps }
       isBreak: false,
       roundsRemaining: timerProps.numberRounds,
       currentTime: timerProps.timeRound,
+      isFinally:false,
       buttonActive: {
         buttonInit: false,
         buttonRestart: true,
