@@ -2,7 +2,7 @@ export type TimerCoundDownControl = {
     timeRound:number,
     timeBreaks:number,
     numberRounds:number,
-    isBreak:boolean,
+    isBreak:boolean|null,
     roundsRemaining:number,
     currentTime:number,
     buttonActive:ButtonsUIActive,

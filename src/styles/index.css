@@ -60,7 +60,7 @@ h3 {
 }
 
 p {
-  font-size: 10vh;
+  font-size: 4vh;
   line-height: 1.6;
   color: #444;
   text-align: center;
@@ -122,18 +122,18 @@ input[type="number"] {
 }
 
 label {
-  font-size: 1rem; /* Tamaño de texto adecuado */
-  font-weight: 600; /* Negrita para mejor legibilidad */
-  color: #333; /* Color oscuro para contraste */
+  font-size: 1rem; 
+  font-weight: 600; 
+  color: #333; 
   font-family: 'Arial', sans-serif;
-  display: block; /* Para que cada etiqueta ocupe su línea */
-  margin-bottom: 5px; /* Espaciado con el input */
-  letter-spacing: 0.5px; /* Ligero espaciado entre letras */
+  display: block; 
+  margin-bottom: 5px; 
+  letter-spacing: 0.5px; 
 }
 
-/* Estilo cuando el label está asociado a un input enfocado */
+
 input:focus + label {
-  color: #007BFF; /* Azul vibrante para destacar */
+  color: #007BFF;
   font-weight: bold;
   transition: color 0.3s ease-in-out;
 }
