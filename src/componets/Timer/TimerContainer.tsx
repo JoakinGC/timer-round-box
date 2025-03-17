@@ -1,7 +1,7 @@
-import { FormTimerProps } from "../types/Timer";
+import { FormTimerProps } from "../../types/Timer";
 import Timer from "./Timer";
 //import { useTimerInterval } from "../hooks/useTimerInterval";
-import { useTimerCountdown } from "../hooks/useTimerCountDown";
+import { useTimerCountdown } from "../../hooks/useTimerCountDown";
 import "../styles/TimerContainer.css";
 import ring from  "../assets/ring.mp3";
 import roundSound from  "../assets/boxingStartRound.mp3";

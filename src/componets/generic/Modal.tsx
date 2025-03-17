@@ -1,10 +1,9 @@
 import React from "react";
-import { ModalProps } from "../types/Modal";
+import { ModalProps } from "../../types/Modal";
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, message, type = "error" }) => {
     if (!isOpen) return null;
 
-    
     const colors: Record<"error" | "success" | "warning" | "info", string> = {
         error: "bg-red-600",
         success: "bg-green-600",

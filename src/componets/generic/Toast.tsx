@@ -1,4 +1,4 @@
-import { ModalProps } from "../types/Modal";
+import { ModalProps } from "../../types/Modal";
 import "../styles/Toast.css";
 
 const Toast = ({ isOpen, onClose, message, type = "error" }:ModalProps) => {

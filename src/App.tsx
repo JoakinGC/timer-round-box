@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './styles/App.css';
-import FormTimer from './componets/FormTimer';
-import TimerContainer from './componets/TimerContainer';
+import FormTimer from './componets/Form/FormTimer';
+import TimerContainer from './componets/Timer/TimerContainer';
 import { FormTimerProps } from './types/Timer';
 import logo from "./assets/logo.svg";
 

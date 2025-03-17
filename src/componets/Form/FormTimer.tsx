@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { FormTimerProps, TimerProps } from "../types/Timer";
+import { FormTimerProps, TimerProps } from "../../types/Timer";
 import InputTimer from "./InputTimer";
-import { validateTime } from "../utils/validateTime";
+import { validateTime } from "../../utils/validateTime";
 import "../styles/FormTimer.css";
-import Toast from "./Toast";
+import Toast from "../generic/Toast";
 
 const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTimer: FormTimerProps }) => {
   const [timerRound, setTimerRound] = useState<TimerProps>({

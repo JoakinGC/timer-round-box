@@ -1,4 +1,4 @@
-import { TimerProps } from "../types/Timer";
+import { TimerProps } from "../../types/Timer";
 
 const Timer = ({hours,minutes,seconds}:TimerProps) =>{
     return(
