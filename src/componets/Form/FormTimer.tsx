@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FormTimerProps, TimerProps } from "../../types/Timer";
 import InputTimer from "./InputTimer";
 import { validateTime } from "../../utils/validateTime";
-import "../styles/FormTimer.css";
+import "../../styles/FormTimer.css";
 import Toast from "../generic/Toast";
 
 const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTimer: FormTimerProps }) => {

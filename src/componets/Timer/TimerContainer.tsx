@@ -2,9 +2,9 @@ import { FormTimerProps } from "../../types/Timer";
 import Timer from "./Timer";
 //import { useTimerInterval } from "../hooks/useTimerInterval";
 import { useTimerCountdown } from "../../hooks/useTimerCountDown";
-import "../styles/TimerContainer.css";
-import ring from  "../assets/ring.mp3";
-import roundSound from  "../assets/boxingStartRound.mp3";
+import "../../styles/TimerContainer.css";
+import ring from  "../../assets/ring.mp3";
+import roundSound from  "../../assets/boxingStartRound.mp3";
 import { useEffect } from "react";
 
 const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
