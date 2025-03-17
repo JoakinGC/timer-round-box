@@ -19,7 +19,7 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
                 <h3>
                     {(timerState.isFinally) ? "Fin": timerState.isBreak ?"Descanso" :"Round"}
                 </h3>
-            </article>
+        </article>
         <article className="timer-container">
             <article>
                 <h2>Número de Rounds</h2>
@@ -33,7 +33,7 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
                 />
             </article>
             <article>
-                <h2>Rounds completos:</h2>
+                <h2>Rounds restantes:</h2>
                 <p>{timerState.roundsRemaining}</p>
             </article>
         </article>
