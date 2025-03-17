@@ -27,3 +27,12 @@
     background-color: #0056b3; 
     transition: background 0.3s ease-in-out;
 }
+
+@media (min-width:1025px){
+    .timer-container{
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 5vw;
+    }
+  }
