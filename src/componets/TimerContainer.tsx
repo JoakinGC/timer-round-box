@@ -3,6 +3,9 @@ import Timer from "./Timer";
 //import { useTimerInterval } from "../hooks/useTimerInterval";
 import { useTimerCountdown } from "../hooks/useTimerCountDown";
 import "../styles/TimerContainer.css";
+import ring from  "../assets/ring.mp3";
+import roundSound from  "../assets/boxingStartRound.mp3";
+import { useEffect } from "react";
 
 const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     
@@ -11,6 +14,13 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
     const { startTimer, stopTimer, resetTimer, timerState, toHms } = useTimerCountdown({ timerProps });
 
     const { hours, minutes, seconds } = toHms(timerState.currentTime);
+    const finalSound = new Audio(ring);
+    const boxRoundSound = new Audio(roundSound);
+
+    useEffect(() =>{
+        if(timerState.isFinally) finalSound.play();
+        if(timerState.isBreak) boxRoundSound.play();
+    },[timerState.isFinally,timerState.isBreak])
 
     return(
         <>
@@ -42,6 +52,7 @@ const TimerContainer = ({timerProps}:{timerProps:FormTimerProps}) =>{
             <button disabled={timerState.buttonActive.buttonInit} onClick={() => startTimer()}>Iniciar</button>
             <button disabled={timerState.buttonActive.buttonRestart} onClick={() => resetTimer()}>Reinciar</button>
         </article>
+        
         </>
 
     )
