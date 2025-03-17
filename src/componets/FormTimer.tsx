@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormTimerProps, TimerProps } from "../types/Timer";
 import InputTimer from "./InputTimer";
 import { validateTime } from "../utils/validateTime";
 import "../styles/FormTimer.css";
-import Modal from "./Modal";
+import Toast from "./Toast";
 
 const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTimer: FormTimerProps }) => {
   const [timerRound, setTimerRound] = useState<TimerProps>({
@@ -19,7 +19,7 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
   const [nRounds, setNRounds] = useState<number>(0);
 
   const [errorMsg, setErrorMsg] = useState({
-    isModalOpen:false,
+    isToastOpen:false,
     errorMsg:""
   });
 
@@ -32,7 +32,7 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
     if (typeof nRounds !== "number" || isNaN(nRounds)) {
       setErrorMsg(prev => ({
         ...prev,
-        isModalOpen:true,
+        isToastOpen:true,
         errorMsg:"Nº de rounds debe ser un número",
       }));
       return;
@@ -40,7 +40,7 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
     if (nRounds <= 0) {
       setErrorMsg(prev => ({
         ...prev,
-        isModalOpen:true,
+        isToastOpen:true,
         errorMsg:"Nº de rounds debe ser mayor que 0",
       }));
       return;
@@ -65,13 +65,16 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
     });
   }
 
+  useEffect(() => {
+    if (errorMsg.isToastOpen) {
+        const timer = setTimeout(() => setErrorMsg((prev) =>({...prev,isToastOpen:false,errorMsg:""})), 3000);
+        return () => clearTimeout(timer);
+    }
+}, [errorMsg.isToastOpen]);
+
   return (
 
     <form className="form" onSubmit={handleSubmit}>
-      
-      
-
- 
       <article className="form--article">
         <label>Tiempo de Round:</label>
         <InputTimer
@@ -103,12 +106,10 @@ const FormTimer = ({ SetTimerProps, propsTimer }: { SetTimerProps: any; propsTim
         <article className="form--article form--boutton">
           <button  type="submit">Tiempo</button>
         </article>
-        <article className="form--error--message">
         
-        </article>
-        <Modal
-          isOpen={errorMsg.isModalOpen}
-          onClose={() => setErrorMsg(prev => ({...prev,isModalOpen:false,errorMsg:""}))}
+        <Toast
+          isOpen={errorMsg.isToastOpen}
+          onClose={() => setErrorMsg(prev => ({...prev,isToastOpen:false,errorMsg:""}))}
           title="Error"
           message={errorMsg.errorMsg}
           type="error"
