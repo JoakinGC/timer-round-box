@@ -12,7 +12,7 @@ export function useTimerCountdown({ timerProps }: { timerProps: FormTimerProps }
     roundsRemaining: timerProps.numberRounds,
     currentTime: timerProps.timeRound,
     buttonActive: {
-      buttonInit: false,
+      buttonInit: true,
       buttonStop: true,
       buttonRestart: true
     },
@@ -137,22 +137,26 @@ export function useTimerCountdown({ timerProps }: { timerProps: FormTimerProps }
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-
-    setTimerState((prev) => ({
-      ...prev,
-      timeRound: timerProps.timeRound,
-      timeBreaks: timerProps.timeBreaks,
-      numberRounds: timerProps.numberRounds,
-      isBreak: false,
-      roundsRemaining: timerProps.numberRounds,
-      currentTime: timerProps.timeRound,
-      isFinally:false,
-      buttonActive: {
-        buttonInit: false,
-        buttonRestart: true,
-        buttonStop: true
-      }
-    }));
+    if(timerProps.numberRounds>0
+      && timerProps.timeBreaks>0
+      && timerProps.timeRound>0
+    ){
+      setTimerState((prev) => ({
+        ...prev,
+        timeRound: timerProps.timeRound,
+        timeBreaks: timerProps.timeBreaks,
+        numberRounds: timerProps.numberRounds,
+        isBreak: false,
+        roundsRemaining: timerProps.numberRounds,
+        currentTime: timerProps.timeRound,
+        isFinally:false,
+        buttonActive: {
+          buttonInit: false,
+          buttonRestart: true,
+          buttonStop: true
+        }
+      }));
+    }
   }, [timerProps]);
 
   return {
